@@ -450,10 +450,10 @@ angular.module('ajoslin.scrolly.dragger', [])
       function dragEnd(e) {
 
         if (self.state.active) {
-          if (self.state.distance.y > 20 || self.state.distance.y < -20) {
+          e = e.originalEvent || e; // for jquery
+          if (!!self.state.direction) {
             e.preventDefault();
           }
-          e = e.originalEvent || e; // for jquery
           options.stopPropagation && e.stopPropagation();
 
           self.state.updatedAt = Date.now();
