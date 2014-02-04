@@ -13,8 +13,7 @@
     "grunt-ngdocs": "git://github.com/m7r/grunt-ngdocs",
     "shelljs": "~0.1.4",
     "grunt-bump": "git://github.com/ajoslin/grunt-bump",
-    "karma": "~0.10",
-    "karma-sauce-launcher": "0.1.1",
+    "karma-sauce-launcher": "0.1.8",
     "grunt-conventional-changelog": "~1.0.0"
   }
 }

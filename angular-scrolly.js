@@ -1,5 +1,5 @@
 /*
- * angular-scrolly - v0.0.8 - 2013-10-22
+ * angular-scrolly - v0.0.8 - 2014-02-04
  * http://github.com/ajoslin/angular-scrolly
  * Created by Andy Joslin; Licensed under Public Domain
  */
@@ -450,6 +450,9 @@ angular.module('ajoslin.scrolly.dragger', [])
       function dragEnd(e) {
 
         if (self.state.active) {
+          if (self.state.distance.y > 20 || self.state.distance.y < -20) {
+            e.preventDefault();
+          }
           e = e.originalEvent || e; // for jquery
           options.stopPropagation && e.stopPropagation();
 
@@ -698,7 +701,7 @@ angular.module('ajoslin.scrolly.scroller', [
       var top = parseInt(style.getPropertyValue('top'), 10);
       var bottom = parseInt(style.getPropertyValue('bottom'), 10);
 
-      var height = parseInt(style.getPropertyValue('height'), 10);
+      var height = Math.ceil(parseFloat(style.getPropertyValue('height'), 10));
       return {
         top: offTop + (isNaN(top) ? 0 : top),
         bottom: offBottom + (isNaN(bottom) ? 0 : bottom),
@@ -756,7 +759,7 @@ angular.module('ajoslin.scrolly.scroller', [
         var screenHeight = $window.innerHeight;
         //If our content doesn't fill the whole area, just act like it's
         //exactly one screen tall for scrolling purposes
-        if (rect.height < screenHeight) {
+        if (rect.height + rect.top + rect.bottom < screenHeight) {
           self.scrollHeight = 0;
         } else {
           self.scrollHeight = rect.height - screenHeight + rect.top + rect.bottom;
