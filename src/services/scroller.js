@@ -163,7 +163,7 @@ angular.module('ajoslin.scrolly.scroller', [
       var top = parseInt(style.getPropertyValue('top'), 10);
       var bottom = parseInt(style.getPropertyValue('bottom'), 10);
 
-      var height = parseInt(style.getPropertyValue('height'), 10);
+      var height = Math.ceil(parseFloat(style.getPropertyValue('height'), 10));
       return {
         top: offTop + (isNaN(top) ? 0 : top),
         bottom: offBottom + (isNaN(bottom) ? 0 : bottom),
@@ -221,7 +221,7 @@ angular.module('ajoslin.scrolly.scroller', [
         var screenHeight = $window.innerHeight;
         //If our content doesn't fill the whole area, just act like it's
         //exactly one screen tall for scrolling purposes
-        if (rect.height < screenHeight) {
+        if (rect.height + rect.top + rect.bottom < screenHeight) {
           self.scrollHeight = 0;
         } else {
           self.scrollHeight = rect.height - screenHeight + rect.top + rect.bottom;
